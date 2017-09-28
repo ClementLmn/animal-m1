@@ -1,0 +1,34 @@
+{
+  "name": "animal-m1",
+  "version": "1.0.0",
+  "description": "Particles effect",
+  "scripts": {
+    "start": "webpack-dev-server",
+    "build": "webpack",
+    "deploy": "git subtree push --prefix dist origin gh-pages"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clementlmn/animal-m1.git"
+  },
+  "author": "Clément Lemoine",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/clementlmn/animal-m1/issues"
+  },
+  "homepage": "https://github.com/clementlmn/animal-m1#readme",
+  "devDependencies": {
+    "css-loader": "^0.28.7",
+    "html-webpack-plugin": "^2.30.1",
+    "style-loader": "^0.18.2",
+    "uglifyjs-webpack-plugin": "^1.0.0-beta.2",
+    "webpack": "^3.6.0",
+    "webpack-dev-server": "^2.8.2"
+  },
+  "dependencies": {
+    "dat.gui": "^0.6.1",
+    "gsap": "^1.20.2",
+    "stats.js": "^0.17.0",
+    "three": "^0.87.1"
+  }
+}
