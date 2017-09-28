@@ -60,8 +60,8 @@ const wasp = new THREE.Group();
 
 // LE CORPS
 const bodyGroup = new THREE.Group();
-const matOrange = new THREE.MeshPhongMaterial( {color: 0xf7be35, specular: 0xffcc52} );
-const matBlack = new THREE.MeshPhongMaterial( {color: "black", specular: 0x282828} );
+const matOrange = new THREE.MeshPhongMaterial( {color: 0xf7be35, specular: 0xffcc52, side: THREE.DoubleSide} );
+const matBlack = new THREE.MeshPhongMaterial( {color: "black", specular: 0x282828, side: THREE.DoubleSide} );
 
 const geoBodyRight = new THREE.CylinderGeometry( 9, 1, 10, 8 );
 const meshBodyRight = new THREE.Mesh( geoBodyRight, matOrange );
@@ -131,18 +131,26 @@ wasp.add(dardGroup);
 // LA TETE DE LA BETE
 const headGroup = new THREE.Group();
 
-const geoHeadStartUp = new THREE.ConeGeometry( 5, 7, 8, 1);
-const meshHeadStartUp = new THREE.Mesh( geoHeadStartUp, matBlack );
-geoHeadStartUp.vertices[0].x += 4;
-geoHeadStartUp.computeVertexNormals();
-geoHeadStartUp.computeFaceNormals();
-geoHeadStartUp.__dirtyVertices = true;
-geoHeadStartUp.__dirtyNormals = true;
-meshHeadStartUp.rotation.z = -Math.PI / 2;
-meshHeadStartUp.rotation.x = Math.PI;
-meshHeadStartUp.position.x = -35;
+const geoHeadStart = new THREE.ConeGeometry( 5, 7, 8, 1);
+const meshHeadStart = new THREE.Mesh( geoHeadStart, matBlack );
+geoHeadStart.vertices[0].x += 4;
+geoHeadStart.computeVertexNormals();
+geoHeadStart.computeFaceNormals();
+geoHeadStart.__dirtyVertices = true;
+geoHeadStart.__dirtyNormals = true;
+meshHeadStart.rotation.z = -Math.PI / 2;
+meshHeadStart.rotation.x = Math.PI;
+meshHeadStart.position.x = -35;
 
-headGroup.add(meshHeadStartUp);
+headGroup.add(meshHeadStart);
+
+const geoHeadEnd = new THREE.SphereGeometry(7, 8, 4, 0, Math.PI * 2, 0, Math.PI / 2)
+const meshHeadEnd = new THREE.Mesh( geoHeadEnd, matBlack );
+meshHeadEnd.rotation.z = -Math.PI / 2;
+meshHeadEnd.rotation.y = Math.PI;
+meshHeadEnd.position.x = -42;
+
+headGroup.add(meshHeadEnd);
 
 wasp.add(headGroup);
 
