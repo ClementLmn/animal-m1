@@ -29,33 +29,11 @@ camera.lookAt(scene.position)
 
 const controls = new OrbitControls (camera, renderer.domElement);
 
-const axisHelper = new THREE.AxisHelper( 100 );
-scene.add( axisHelper );
-
 
 // LES LIGHTS
 
 const ambientLight = new THREE.AmbientLight(0xffffff, 1); // soft white light
 scene.add( ambientLight );
-
-// const spotLight = new THREE.SpotLight(0xffffff);
-// spotLight.angle = Math.PI/4;
-// spotLight.castShadow = true;
-// spotLight.penumbra = 0.4;
-// spotLight.decay = 2;
-// spotLight.distance = 450; 
-// spotLight.position.set(0,150,0);
-// spotLight.shadow.camera.left = -40;
-// spotLight.shadow.camera.right = 40;
-// spotLight.shadow.camera.top = 40;
-// spotLight.shadow.camera.bottom = -40;
-// spotLight.shadow.camera.near = 1;
-// spotLight.shadow.camera.far = 1000;
-// spotLight.shadow.mapSize.width = spotLight.shadow.mapSize.height = 2048;
-// scene.add( spotLight );
-
-// var spotLightHelper = new THREE.SpotLightHelper( spotLight );
-// scene.add( spotLightHelper );
 
 const bulb = new THREE.PointLight(0xffffff);
 bulb.angle = Math.PI/4;
@@ -79,7 +57,7 @@ scene.add( bulb );
 var geoFloor = new THREE.PlaneGeometry( 2050, 2050, 32 );
 var matFloor = new THREE.MeshPhongMaterial({
     color: 0xe07a57, 
-    shading:THREE.FlatShading, 
+    flatShading : true, 
     side: THREE.DoubleSide
 });
 var floor = new THREE.Mesh( geoFloor, matFloor );
@@ -97,13 +75,13 @@ const bodyGroup = new THREE.Group();
 const matOrange = new THREE.MeshPhongMaterial( {
     color: 0xf7be35, 
     shininess:0,
-    shading:THREE.FlatShading, 
+    flatShading : true, 
     side: THREE.DoubleSide
 });
 const matBlack = new THREE.MeshPhongMaterial({
     color: 0x202020, 
     shininess:0,
-    shading:THREE.FlatShading, 
+    flatShading : true, 
     side: THREE.DoubleSide
 });
 
@@ -169,7 +147,6 @@ dardGroup.position.x = -6;
 wasp.add(dardGroup);
 
 
-
 // LA TETE DE LA BETE
 const headGroup = new THREE.Group();
 
@@ -194,12 +171,52 @@ meshHeadEnd.position.x = -40;
 
 headGroup.add(meshHeadEnd);
 
-headGroup.position.x = 6;
-headGroup.position.y = 1;
-headGroup.rotation.z = 0.2;
+headGroup.position.x = 8;
+headGroup.position.y = -5;
 
 wasp.add(headGroup);
 
+// LES ANTENNNNNES
+const antenne1 = new THREE.Group();
+
+const geoA1Base = new THREE.CylinderGeometry( 0.5, 0.5, 10, 32);
+const a1Base = new THREE.Mesh( geoA1Base, matBlack );
+a1Base.rotation.z = Math.PI / -2 - 0.3;
+antenne1.add(a1Base);
+const geoA1End = new THREE.CylinderGeometry( 0.5, 0, 10, 32);
+const a1End = new THREE.Mesh( geoA1End, matBlack );
+a1End.rotation.z = Math.PI / -2 + 0.3;
+a1End.position.x = -9.25;
+a1End.position.y = 0;
+antenne1.add(a1End);
+
+antenne1.position.x = -37;
+antenne1.position.y = -1;
+antenne1.position.z = -4;
+antenne1.rotation.x = -0.7;
+
+const antenne2 = new THREE.Group();
+
+const geoA2Base = new THREE.CylinderGeometry( 0.5, 0.5, 10, 32);
+const a2Base = new THREE.Mesh( geoA2Base, matBlack );
+a2Base.rotation.z = Math.PI / -2 - 0.3;
+antenne2.add(a2Base);
+const geoA2End = new THREE.CylinderGeometry( 0.5, 0, 10, 32);
+const a2End = new THREE.Mesh( geoA2End, matBlack );
+a2End.rotation.z = Math.PI / -2 + 0.3;
+a2End.position.x = -9.25;
+a2End.position.y = 0;
+antenne2.add(a2End);
+
+antenne2.position.x = -37;
+antenne2.position.y = -1;
+antenne2.position.z = 4;
+antenne2.rotation.x = 0.7;
+
+
+
+wasp.add(antenne1);
+wasp.add(antenne2);
 
 wasp.traverse(m => {
    m.castShadow = true;
